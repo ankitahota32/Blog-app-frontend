@@ -47,10 +47,13 @@ const Profile: React.FC<ProfileProps> = () => {
 
   const handleSave = async (id: string) => {
     try {
-      await axios.put(`https://blog-app-backend-d73u.onrender.com/${id}`, {
-        title: editedTitle,
-        content: editedContent,
-      });
+      await axios.put(
+        `https://blog-app-backend-d73u.onrender.com/posts/${id}`,
+        {
+          title: editedTitle,
+          content: editedContent,
+        }
+      );
       setPosts(
         posts.map((post) =>
           post._id === id
@@ -67,7 +70,9 @@ const Profile: React.FC<ProfileProps> = () => {
 
   const deletePost = async (id: string) => {
     try {
-      await axios.delete(`https://blog-app-backend-d73u.onrender.com/${id}`);
+      await axios.delete(
+        `https://blog-app-backend-d73u.onrender.com/posts/${id}`
+      );
       setPosts(posts.filter((post) => post._id !== id));
     } catch (error) {
       console.error("Error deleting post:", error);
