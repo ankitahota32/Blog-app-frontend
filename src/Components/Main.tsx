@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"; // Js library used for making HTTP requests from a web browser
-import { Link } from "react-router-dom"; // Link to another page
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface Post {
   _id: string;
@@ -9,17 +9,18 @@ interface Post {
   author: string;
   createdAt: string;
   imageUrl: string;
-} // Basically the structure of the object that have specific properties
+}
 
 const Main: React.FC = () => {
-  // React functional component
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/posts");
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/posts`
+        );
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -31,16 +32,14 @@ const Main: React.FC = () => {
     fetchPosts();
   }, []);
 
-  const truncateContent = (content: string, length: number) =>
-    content.length > length ? content.substring(0, length) + "..." : content;
+  const truncateTitle = (title: string, length: number) =>
+    title.length > length ? title.substring(0, length) + "..." : title;
 
   return (
-    <div className="min-h-screen bg-gray-100 relative">
-      <nav className="bg-white shadow-md p-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <span className="text-xl font-bold">TrueYou</span>
-        </div>
-        <div className="flex items-center space-x-4">
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <nav className="bg-white shadow-md p-4 mb-6 flex items-center justify-between">
+        <span className="text-2xl font-bold text-gray-800">TrueYou</span>
+        <div className="space-x-4">
           <Link to="/about" className="text-gray-600 hover:text-gray-800">
             About
           </Link>
@@ -52,24 +51,24 @@ const Main: React.FC = () => {
           </button>
         </div>
       </nav>
-      <main className="container mx-auto py-8">
+
+      <main className="container mx-auto">
         {loading ? (
           <p className="text-center text-gray-500">Loading posts...</p>
         ) : posts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-              <div key={post._id} className="bg-white p-4 shadow-md rounded-lg">
-                <h2 className="text-xl font-bold">{post.title}</h2>
-                <p className="text-gray-600">by {post.author}</p>
-                <p className="mt-2 text-gray-800">
-                  {truncateContent(post.content, 100)}
-                </p>
-                <p className="text-sm text-gray-400">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </p>
+              <div
+                key={post._id}
+                className="bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white p-6 rounded-lg shadow-xl transform transition duration-500 hover:scale-105"
+              >
+                <h2 className="text-2xl font-bold mb-2">
+                  {truncateTitle(post.title, 30)}
+                </h2>
+                <p className="text-sm mb-4">by {post.author}</p>
                 <Link
                   to={`/post/${post._id}`}
-                  className="mt-4 inline-block bg-purple-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-purple-500 transition duration-300"
+                  className="block bg-white text-purple-800 px-4 py-2 rounded-full text-center font-semibold mt-4"
                 >
                   Read More
                 </Link>
@@ -80,6 +79,7 @@ const Main: React.FC = () => {
           <p className="text-center text-gray-500">No posts available.</p>
         )}
       </main>
+
       <Link
         to="/post"
         className="fixed bottom-4 right-4 bg-purple-800 text-white p-4 rounded-full shadow-lg hover:bg-purple-600 transition"

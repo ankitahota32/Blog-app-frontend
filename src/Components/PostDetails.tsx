@@ -19,7 +19,9 @@ const PostDetail: React.FC = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/posts/${id}`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/${id}`
+        );
         setPost(response.data);
       } catch (err) {
         setError("Error fetching the post. Please try again later.");
@@ -44,15 +46,27 @@ const PostDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="container mx-auto bg-white p-6 shadow-lg rounded-lg">
-        <h1 className="text-3xl font-bold">{post.title}</h1>
-        <p className="text-gray-600 mt-2">by {post.author}</p>
-        <p className="text-sm text-gray-400 mt-1">
-          {new Date(post.createdAt).toLocaleDateString()}
-        </p>
-        <div className="mt-4 text-gray-800">
-          <p>{post.content}</p>
+    <div className="min-h-screen bg-gray-100 py-12 px-4">
+      <div className="container mx-auto max-w-screen-lg">
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold text-gray-900 leading-tight break-words">
+            {post.title}
+          </h1>
+          <p className="text-gray-600 mt-2 text-lg">by {post.author}</p>
+          <p className="text-sm text-gray-500">
+            {new Date(post.createdAt).toLocaleDateString()}
+          </p>
+        </div>
+
+        <div className="text-lg leading-relaxed text-start text-gray-800 whitespace-pre-wrap">
+          {post.content}
+        </div>
+
+        <div className="mt-10 text-sm text-gray-500 flex justify-between">
+          <span>
+            Published on: {new Date(post.createdAt).toLocaleDateString()}
+          </span>
+          <span>Author: {post.author}</span>
         </div>
       </div>
     </div>

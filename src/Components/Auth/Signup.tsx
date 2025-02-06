@@ -23,7 +23,7 @@ const SignUp: React.FC = () => {
       if (response.data === "exist") {
         alert("User already exists");
       } else if (response.data.status === "User created successfully") {
-        navigate("/main");
+        navigate("/login");
       }
     } catch (error) {
       alert("Wrong Details");

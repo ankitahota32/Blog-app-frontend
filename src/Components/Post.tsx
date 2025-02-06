@@ -17,7 +17,7 @@ const Post: React.FC = () => {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:8000/posts", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, {
         title,
         content,
         author,
