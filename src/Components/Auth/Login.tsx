@@ -14,7 +14,7 @@ const Login: React.FC = () => {
 
     try {
       await axios
-        .post(`${process.env.REACT_APP_API_URL}/`, {
+        .post(`${process.env.REACT_APP_API_URL}/api/`, {
           email,
           password,
         }) // Backend Api hit
