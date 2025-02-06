@@ -13,7 +13,7 @@ const SignUp: React.FC = () => {
     e.preventDefault(); // Ts function designed to handle a form submission in a react component
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/signup`, //backend api hit
+        `https://blog-app-backend-d73u.onrender.com/signup`, //backend api hit
         {
           email,
           password,

@@ -14,7 +14,7 @@ const Login: React.FC = () => {
 
     try {
       await axios
-        .post(`${process.env.REACT_APP_API_URL}/api/`, {
+        .post(`https://blog-app-backend-d73u.onrender.com/`, {
           email,
           password,
         }) // Backend Api hit
