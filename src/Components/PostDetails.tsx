@@ -20,7 +20,7 @@ const PostDetail: React.FC = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `https://blog-app-backend-d73u.onrender.com/${id}`
+          `${process.env.REACT_APP_API_URL}/posts/${id}`
         );
         setPost(response.data);
       } catch (err) {
