@@ -19,7 +19,7 @@ const Main: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://blog-app-backend-d73u.onrender.com/signup/posts`
+          `https://blog-app-backend-d73u.onrender.com/posts`
         );
         setPosts(response.data);
       } catch (error) {

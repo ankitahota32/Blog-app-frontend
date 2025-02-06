@@ -18,7 +18,7 @@ const Post: React.FC = () => {
 
     try {
       await axios.post(
-        `https://blog-app-backend-d73u.onrender.com/signup/posts`,
+        `https://blog-app-backend-d73u.onrender.com/posts`,
         {
           title,
           content,
