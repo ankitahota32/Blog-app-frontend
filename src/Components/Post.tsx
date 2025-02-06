@@ -17,12 +17,15 @@ const Post: React.FC = () => {
     setLoading(true);
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, {
-        title,
-        content,
-        author,
-        userId,
-      });
+      await axios.post(
+        `https://blog-app-backend-d73u.onrender.com/signup/posts`,
+        {
+          title,
+          content,
+          author,
+          userId,
+        }
+      );
       navigate("/main"); // Redirect to the main page after successful post creation
     } catch (error) {
       console.error("Error creating post:", error);

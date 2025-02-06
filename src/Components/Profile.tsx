@@ -25,7 +25,7 @@ const Profile: React.FC<ProfileProps> = () => {
     const fetchUserPosts = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/${userId}`
+          `https://blog-app-backend-d73u.onrender.com/signup/${userId}`
         );
         setPosts(response.data);
       } catch (error) {
